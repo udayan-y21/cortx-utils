@@ -428,6 +428,8 @@ class ConsulKvPayload(KvPayload):
             return None
         index, data = self._consul.kv.get(self._store_path+key)
         if isinstance(data, dict):
+            if data['Value'] is None:
+                return ''
             return data['Value'].decode()
         elif data is None:
             return None
